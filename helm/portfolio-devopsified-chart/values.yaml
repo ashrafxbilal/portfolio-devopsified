@@ -3,7 +3,7 @@ application:
   name: portfolio-devopsified
   image:
     repository: ashrafxbilal/portfolio-devopsified
-    tag: 14538228577
+    tag: 14538258705
     pullPolicy: IfNotPresent
   port: 3000
 
