@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: portfolio-devopsified-service
+spec:
+  selector:
+    app: portfolio-devopsified
+  ports:
+  - port: 80
+    targetPort: 3000
+  type: ClusterIP

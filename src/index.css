@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:wght@400;700&family=VT323&family=Press+Start+2P&family=Comic+Neue:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 20% 98%;
+    --foreground: 220 20% 10%;
+
+    --card: 40 20% 99%;
+    --card-foreground: 220 20% 10%;
+
+    --popover: 40 20% 99%;
+    --popover-foreground: 220 20% 10%;
+
+    --primary: 220 20% 20%;
+    --primary-foreground: 40 20% 98%;
+
+    --secondary: 40 20% 95%;
+    --secondary-foreground: 220 20% 20%;
+
+    --muted: 40 20% 95%;
+    --muted-foreground: 215 12% 40%;
+
+    /* Bolder accent for Material You influence */
+    --accent: 108 100% 55%; /* Slightly bolder green */
+    --accent-foreground: 220 20% 5%; /* Higher contrast foreground */
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 40 20% 98%;
+
+    --border: 40 20% 90%;
+    --input: 40 20% 90%;
+    --ring: 224 71% 4%;
+
+    /* Slightly sharper radius for Neo-Brutalist touch */
+    --radius: 0.2rem;
+
+    --sidebar-background: 40 20% 97%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 40 20% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 40 20% 90%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Neo-Brutalist High Contrast Color */
+    --highlight: 108 100% 50%; /* Keep highlight vibrant */
+    --highlight-contrast: 220 20% 5%; /* High contrast for text on highlight */
+  }
+
+  .dark {
+    --background: 220 20% 10%;
+    --foreground: 0 0% 95%;
+
+    --card: 220 20% 13%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 220 20% 13%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 0% 95%;
+    --primary-foreground: 220 20% 10%;
+
+    --secondary: 220 20% 16%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 220 20% 16%;
+    --muted-foreground: 217 12% 65%;
+
+    /* Bolder accent for Material You influence */
+    --accent: 108 80% 55%; /* Bolder green in dark mode */
+    --accent-foreground: 0 0% 98%; /* High contrast foreground */
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 220 20% 20%;
+    --input: 220 20% 16%;
+    --ring: 212.7 26.8% 83.9%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Neo-Brutalist High Contrast Color */
+    --highlight: 108 100% 55%; /* Keep highlight vibrant */
+    --highlight-contrast: 220 20% 5%; /* High contrast for text on highlight */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-mono antialiased;
+    /* Keep existing background, maybe add subtle pattern later if needed */
+    background-image: 
+      url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E"),
+      radial-gradient(at 100% 0%, hsla(var(--accent)/0.15) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(var(--primary)/0.1) 0px, transparent 50%);
+    background-attachment: fixed;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236CFF32' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19l7-7 3 3-7 7-3-3z'%3E%3C/path%3E%3Cpath d='M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z'%3E%3C/path%3E%3Cpath d='M2 2l7.586 7.586'%3E%3C/path%3E%3Ccircle cx='11' cy='11' r='2'%3E%3C/circle%3E%3C/svg%3E"), auto;
+  }
+
+  .typewriter-effect {
+    position: relative;
+  }
+
+  .typewriter-effect::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: hsl(var(--background));
+    animation: typewriter 2s steps(28) forwards;
+  }
+  
+  /* Y2K-inspired glass morphism effects */
+  .glass {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    /* Neo-Brutalist: Slightly sharper edges */
+    border-radius: var(--radius);
+  }
+  
+  .glass:before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0.1) 60%, transparent 70%);
+    transform: rotate(45deg);
+    animation: glass-shine 6s linear infinite;
+    pointer-events: none;
+  }
+  
+  .dark .glass {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  @keyframes glass-shine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+  }
+  
+  /* Modern card hover effects with Y2K/Neo-Brutalist influence */
+  .card-hover {
+    transition: all 0.3s ease;
+    position: relative;
+    /* Neo-Brutalist: Add a subtle border */
+    border: 1px solid hsl(var(--border));
+  }
+  
+  .card-hover:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* Material You: Use accent color for hover effect */
+    background: linear-gradient(45deg, transparent 65%, hsla(var(--accent)/0.3) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    border-radius: inherit; /* Match parent border radius */
+  }
+  
+  .card-hover:hover {
+    /* Neo-Brutalist: Sharper shadow, slight playful rotation */
+    transform: translateY(-4px) rotate(-1.5deg);
+    box-shadow: 4px 4px 0px 0px hsl(var(--accent));
+    border-color: hsl(var(--accent));
+  }
+  
+  .card-hover:hover:before {
+    opacity: 1;
+  }
+  
+  .dark .card-hover:hover {
+    box-shadow: 4px 4px 0px 0px hsl(var(--accent));
+  }
+  
+  /* Fix for technical skills hover in dark mode */
+  .dark .bg-secondary\/40:hover {
+    background-color: hsla(var(--accent)/0.6) !important;
+    color: hsl(var(--background)) !important;
+    transform: rotate(-1deg) scale(1.05);
+    /* Neo-Brutalist: Add border on hover */
+    border: 1px solid hsl(var(--accent));
+  }
+  
+  /* Make hashtags more visible and use highlight color */
+  .text-highlight {
+    color: hsl(var(--highlight)) !important;
+    font-weight: 700; /* Bolder */
+  }
+  
+  /* Enhance readability of accent backgrounds */
+  .bg-accent\/10 {
+    background-color: hsla(var(--accent)/0.15);
+    border: 1px solid hsla(var(--accent)/0.3);
+  }
+
+  /* Neo-Brutalist Button Style */
+  .btn-neo {
+    @apply inline-flex items-center justify-center px-5 py-2.5 font-mono font-bold;
+    @apply border-2 border-foreground bg-background text-foreground;
+    @apply transition-all duration-200 ease-out;
+    box-shadow: 4px 4px 0px 0px hsl(var(--foreground));
+    border-radius: 2px; /* Sharp edges */
+  }
+
+  .btn-neo:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px 0px hsl(var(--foreground));
+  }
+
+  .btn-neo:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px 0px hsl(var(--foreground));
+  }
+
+  .btn-neo-primary {
+    @apply border-primary bg-primary text-primary-foreground;
+    box-shadow: 4px 4px 0px 0px hsl(var(--primary) / 0.7);
+  }
+  .btn-neo-primary:hover {
+    box-shadow: 2px 2px 0px 0px hsl(var(--primary) / 0.7);
+  }
+  .btn-neo-primary:active {
+    box-shadow: 0px 0px 0px 0px hsl(var(--primary) / 0.7);
+  }
+
+  .btn-neo-accent {
+    @apply border-accent bg-accent text-accent-foreground;
+    box-shadow: 4px 4px 0px 0px hsl(var(--accent) / 0.7);
+  }
+  .btn-neo-accent:hover {
+    box-shadow: 2px 2px 0px 0px hsl(var(--accent) / 0.7);
+  }
+  .btn-neo-accent:active {
+    box-shadow: 0px 0px 0px 0px hsl(var(--accent) / 0.7);
+  }
+
+  /* Playful Microinteraction Animations */
+  @keyframes boop {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  @keyframes jiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-2deg); }
+    75% { transform: rotate(2deg); }
+  }
+
+  .animate-boop:hover {
+    animation: boop 0.3s ease-in-out;
+  }
+
+  .animate-jiggle:hover {
+    animation: jiggle 0.4s ease-in-out;
+  }
+
+  /* Material You Inspired Shapes (Example using clip-path) */
+  .shape-blob {
+    clip-path: polygon(
+      0% 15%,
+      15% 0%,
+      85% 0%,
+      100% 15%,
+      100% 85%,
+      85% 100%,
+      15% 100%,
+      0% 85%
+    );
+  }
+
+  .shape-skewed {
+    transform: skewX(-5deg);
+  }
+
+  /* High-contrast border utility */
+  .border-hc {
+    @apply border-2 border-foreground;
+  }
+  .dark .border-hc {
+    @apply border-foreground;
+  }
+  .border-hc-accent {
+    @apply border-2 border-accent;
+  }
+
+  /* Sharper edge utility */
+  .rounded-sharp {
+    border-radius: 2px;
+  }
+}
+
+@keyframes typewriter {
+  from { left: 0; }
+  to { left: 100%; }
+}
+
+/* Add any additional custom styles or overrides below */

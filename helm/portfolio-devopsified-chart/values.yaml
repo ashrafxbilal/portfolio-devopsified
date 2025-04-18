@@ -1,0 +1,46 @@
+# Application configuration
+application:
+  name: portfolio-devopsified
+  image:
+    repository: ashrafxbilal/portfolio-devopsified
+    tag: v1
+    pullPolicy: IfNotPresent
+  port: 3000
+
+# Deployment configuration
+deployment:
+  replicas: 2
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+  probes:
+    liveness:
+      path: /
+      initialDelaySeconds: 30
+      periodSeconds: 10
+    readiness:
+      path: /
+      initialDelaySeconds: 5
+      periodSeconds: 5
+
+# Service configuration
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 3000
+
+# Ingress configuration
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: bilalashraf.xyz
+      paths:
+        - path: /
+          pathType: Prefix

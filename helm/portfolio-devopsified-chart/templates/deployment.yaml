@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.application.name }}
+  labels:
+    app: {{ .Values.application.name }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.application.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.application.name }}
+    spec:
+      containers:
+      - name: {{ .Values.application.name }}
+        image: {{ .Values.application.image.repository }}:{{ .Values.application.image.tag }}
+        imagePullPolicy: {{ .Values.application.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.application.port }}
+        resources:
+          requests:
+            cpu: {{ .Values.deployment.resources.requests.cpu }}
+            memory: {{ .Values.deployment.resources.requests.memory }}
+          limits:
+            cpu: {{ .Values.deployment.resources.limits.cpu }}
+            memory: {{ .Values.deployment.resources.limits.memory }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.deployment.probes.liveness.path }}
+            port: {{ .Values.application.port }}
+          initialDelaySeconds: {{ .Values.deployment.probes.liveness.initialDelaySeconds }}
+          periodSeconds: {{ .Values.deployment.probes.liveness.periodSeconds }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.deployment.probes.readiness.path }}
+            port: {{ .Values.application.port }}
+          initialDelaySeconds: {{ .Values.deployment.probes.readiness.initialDelaySeconds }}
+          periodSeconds: {{ .Values.deployment.probes.readiness.periodSeconds }}
