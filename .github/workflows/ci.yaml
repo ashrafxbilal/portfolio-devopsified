@@ -5,7 +5,9 @@ on:
     branches: [ main ]
     # Skip CI runs that were triggered by the CI itself
     paths-ignore:
-      - 'helm/portfolio-devopsified-chart/values.yaml'
+       - 'helm/**'
+       - 'k8s/**'
+       - 'README.md'
   pull_request:
     branches: [ main ]
 
