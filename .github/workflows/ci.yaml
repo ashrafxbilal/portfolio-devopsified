@@ -3,6 +3,9 @@ name: CI Pipeline
 on:
   push:
     branches: [ main ]
+    # Skip CI runs that were triggered by the CI itself
+    paths-ignore:
+      - 'helm/portfolio-devopsified-chart/values.yaml'
   pull_request:
     branches: [ main ]
 
