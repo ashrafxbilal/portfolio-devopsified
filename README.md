@@ -1,4 +1,4 @@
-# DevOps-Powered Portfolio Platform
+# DevOps-Powered Portfolio
 
 [![CI Pipeline](https://github.com/ashrafxbilal/portfolio-devopsified/actions/workflows/ci.yaml/badge.svg)](https://github.com/ashrafxbilal/portfolio-devopsified/actions/workflows/ci.yaml)
 [![Code Quality](https://img.shields.io/badge/code%20quality-A%2B-brightgreen)](https://github.com/ashrafxbilal/portfolio-devopsified)
@@ -8,7 +8,7 @@ A modern, cloud-native portfolio application built to showcase advanced DevOps p
 
 ## 🏗️ Architecture Overview
 
-![Architecture Diagram](https://mermaid.ink/img/pako:eNqFkk9PwzAMxb9KlBOI9QNwQKCJCcSfA-KQNnFXa01TJe7EhPrdsVtWmDhwS-znZ_v5JR2FsRpFITpnLXmCB-cJnlxNtSP4QI-VtbWBDVhyFWmEI9jKOQJjYA0fYGtXw9ZbCnBHtYODhY1z9RvBHVkCb6kk2Hv_6Ks5wbPzDYFxDcGTrWpXwpPfwVKQJVmCPZUE3lYE3tGzJ_A1wRvVBKUzJRTGNQQHqghKsmQJKtIEH1QRbJ0jKKkmOJIu4UgVQUWlI_DWlwQnqgj2lRsJvLMlwTdVBDsqCUqqHEFhXUPwk2qCb1cTHKki-KGa4D_V_1NdGKOXaRJnWZTHcZTlk2yRLvI0nqfpIp7Nxuk4nqfJYjJLZnGWjNMoG0VRnOWjdJTl0_EiTaI8G-XRYhxlaZTl8-ksyqM8G_0CkQGYyQ?type=png)
+![Architecture Diagram](architecture.png)
 
 ## 🎯 Project Goals
 
@@ -59,16 +59,53 @@ A modern, cloud-native portfolio application built to showcase advanced DevOps p
 - **Networking**: NGINX Ingress Controller, Azure DNS
 
 
-## 🔄 CI/CD Pipeline
+## 📦 Containerization
 
-The project implements a robust CI/CD pipeline with the following stages:
+### 🐳 Multi-Stage Docker Build
 
-1. **Build & Test**: Compiles the application and runs automated tests
-2. **Code Quality**: Performs linting and formatting checks
-3. **Docker Build**: Creates optimized container images
-4. **Image Push**: Publishes images to Docker Hub with semantic versioning
-5. **Helm Chart Update**: Updates deployment configuration with new image tags
-6. **GitOps Sync**: ArgoCD detects changes and automatically deploys to Kubernetes
+I've used a multi-stage Docker build to significantly reduce the final image size and improve security:
+
+1. **Builder Stage** :
+   
+   - Uses node:20-alpine as the base image for building the application
+   - Installs necessary build dependencies for canvas and other components
+   - Builds the React application with optimizations enabled
+   - Generates static assets and OpenGraph images
+
+2. **Production Stage** :
+   
+   - Uses lightweight nginx:alpine as the final base image
+   - Copies only the built artifacts from the builder stage
+   - Configures NGINX for serving the SPA application
+   - Reduces final image size by ~85% compared to a single-stage build
+
+**This approach provides several benefits**:
+
+- Smaller Image Size : Final production image is only ~25MB compared to ~200MB for a single-stage build
+- Reduced Attack Surface : Build tools and dependencies are not included in the production image
+- Faster Deployments : Smaller images pull faster and start quicker
+- Better Security : Minimal components in the production image means fewer potential vulnerabilities
+
+## 🚢 Kubernetes Manifests
+
+This has been deployed using Kubernetes manifests with the following components:
+
+### Deployment
+- Uses declarative configuration with 2 replicas for high availability
+- Implements resource requests and limits to ensure efficient resource utilization
+- Configures liveness and readiness probes for self-healing capabilities
+- Uses rolling update strategy for zero-downtime deployments
+
+### Service
+- Exposes the application internally using a ClusterIP service
+- Configures proper selectors to match deployment pods
+- Sets up appropriate ports for the application
+
+### Ingress
+- Configures routing rules for external access
+- Uses annotations for NGINX Ingress Controller customization
+- Sets up TLS for secure HTTPS connections
+- Defines host-based routing for domain access
 
 ## 🌐 Deployment Architecture
 
@@ -79,6 +116,17 @@ The application is deployed on Azure Kubernetes Service (AKS) with the following
 - **Service**: ClusterIP service exposing port 80
 - **Ingress**: NGINX Ingress Controller with custom domain routing
 - **DNS**: Azure DNS zone configuration for domain management
+
+## 🔄 CI/CD Pipeline
+
+The project implements a robust CI/CD pipeline with the following stages:
+
+1. **Build & Test**: Compiles the application and runs automated tests
+2. **Code Quality**: Performs linting and formatting checks
+3. **Docker Build**: Creates optimized container images
+4. **Image Push**: Publishes images to Docker Hub with semantic versioning and tags it with last 4 digits of github run id.
+5. **Helm Chart Update**: Updates deployment configuration with new image tags
+6. **GitOps Sync**: ArgoCD detects changes and automatically deploys to Kubernetes
 
 ## 📊 Monitoring & Observability
 
