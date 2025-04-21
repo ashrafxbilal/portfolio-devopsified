@@ -6,9 +6,6 @@
 
 A modern, cloud-native portfolio application built to showcase advanced DevOps practices and infrastructure automation. This project serves as a practical demonstration of a complete CI/CD pipeline, containerization, Kubernetes orchestration, infrastructure as code, and GitOps methodologies.
 
-## 🏗️ Architecture Overview
-
-![Architecture Diagram](architecture.png)
 
 ## 🎯 Project Goals
 
