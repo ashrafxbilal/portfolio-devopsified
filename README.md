@@ -24,15 +24,6 @@ A modern, cloud-native portfolio application built to showcase advanced DevOps p
 - **Ingress Configuration**: NGINX Ingress Controller with custom domain routing
 - **Resource Optimization**: Container resource limits and requests for efficient scaling
 
-## 🔒 Security Best Practices
-- **Container Security**: Docker images scanned with Trivy for vulnerabilities before deployment
-- **Access Control**: Kubernetes RBAC enforced for least privilege access to resources
-- **Secret Management**: Secrets managed via Kubernetes secrets and Azure Key Vault integration
-- **Dependency Management**: Automated dependency updates and vulnerability alerts via Dependabot
-- **Network Security**: Network policies implemented to restrict pod-to-pod communication
-- **Compliance**: Regular security audits and compliance checks against CIS benchmarks
-- **Image Hardening**: Minimal base images with unnecessary packages removed
-
 ## 📂 Key Files & Documentation
 - [CI Pipeline](.github/workflows/ci.yaml)
 - [AKS Config](aks/cluster-config.md)
